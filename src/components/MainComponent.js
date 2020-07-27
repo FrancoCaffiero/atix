@@ -111,9 +111,9 @@ function Main() {
   };
 
   /* Counter of active alarms non paused */
-  const [amountActiveAlerts, setAmountActiveAlerts] = React.useState(0);
+  const [amountActiveAlarms, setAmountActiveAlarms] = React.useState(0);
   React.useEffect(() => {
-    setAmountActiveAlerts(alarms.filter((a) => !a.paused).length); //Lambda expression to count the amount of alarms with paused = false
+    setAmountActiveAlarms(alarms.filter((a) => !a.paused).length); //Lambda expression to count the amount of alarms with paused = false
   }, [alarms]);
 
   return (
@@ -125,7 +125,7 @@ function Main() {
       <AppBar position="absolute" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <IconButton color="inherit" className={classes.toolbarIcon}>
-            <Badge badgeContent={amountActiveAlerts} color="secondary">
+            <Badge badgeContent={amountActiveAlarms} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>
@@ -150,7 +150,15 @@ function Main() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Switch>
-          <Route path="/dashboard" component={Dashboard} />
+          <Route
+            path="/dashboard"
+            component={() => (
+              <Dashboard
+                nActiveAlarms={amountActiveAlarms}
+                nTotalAlarms={alarms.length}
+              />
+            )}
+          />
           <Route
             path="/alarms"
             component={() => (
