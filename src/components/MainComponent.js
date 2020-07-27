@@ -15,6 +15,7 @@ import { menuBarItems } from "./listItems";
 import Divider from "@material-ui/core/Divider";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
+import { baseUrl } from "../shared/baseUrl";
 
 /* Material UI inline-styling */
 const useStyles = makeStyles((theme) => ({
@@ -65,6 +66,34 @@ const useStyles = makeStyles((theme) => ({
 function Main() {
   /* Material UI inline-styling */
   const classes = useStyles();
+
+  /* Fetching the alarms from the REST API Server and updating the state of the Alarms */
+  const [alarms, setAlarms] = React.useState([]);
+  React.useEffect(() => {
+    fetch(baseUrl + "alarms")
+      .then(
+        (response) => {
+          if (response.ok) {
+            return response;
+          } else {
+            var error = new Error(
+              "Error " + response.status + ": " + response.statusText
+            );
+            error.response = response;
+            throw error;
+          }
+        },
+        (error) => {
+          var errmess = new Error(error.message);
+          throw errmess;
+        }
+      )
+      .then((response) => response.json())
+      .then((alarms) => setAlarms(alarms))
+      .catch((error) => {
+        throw error;
+      });
+  }, []);
 
   /* Search functionality */
   const [searchResults, setSearchResults] = React.useState([]);
