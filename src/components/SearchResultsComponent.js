@@ -10,17 +10,6 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 
-/* Example data */
-const rows = [
-  {
-    name: "MyAlarm",
-    source: "Sever 1",
-    metric: "CPU Usg",
-    trigger: ">80%",
-    paused: "true",
-  },
-];
-
 /* Search results table columns setting */
 const columns = [
   {
@@ -70,7 +59,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 /* Function component for the results table with paginator using React Hooks */
-function SearchResults() {
+/* Through the props, it gets the list of alarms to show in the results table filtered by the search */
+function SearchResults(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -104,7 +94,7 @@ function SearchResults() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {props.searchResults
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -158,7 +148,7 @@ function SearchResults() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={props.searchResults.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}

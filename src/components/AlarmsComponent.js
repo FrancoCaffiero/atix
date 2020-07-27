@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 /* Function component for the Alarms page including the searching functionality */
-const Alarms = () => {
+/* Through the props, it gets search function and the list of results and pass them accordingly */
+const Alarms = (props) => {
   const classes = useStyles();
   return (
     <>
@@ -35,10 +36,10 @@ const Alarms = () => {
         Alarms
       </Typography>
       <Container className={classes.container}>
-        <SearchFilters />
+        <SearchFilters searchAlarms={props.searchAlarms} />
       </Container>
       <Container className={classes.container}>
-        <SearchResults />
+        <SearchResults searchResults={props.searchResults} />
       </Container>
     </>
   );

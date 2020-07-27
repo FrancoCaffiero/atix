@@ -62,9 +62,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/* Example data */
+const alarms = [
+  {
+    name: "MyAlarm",
+    source: "Sever 1",
+    metric: "CPU Usg",
+    trigger: ">80%",
+    paused: "true",
+  },
+];
+
 function Main() {
   /* Material UI inline-styling */
   const classes = useStyles();
+
+  /* Search functionality */
+  const [searchResults, setSearchResults] = React.useState([]);
+  const searchAlarms = (name, status) => {
+    const results = alarms.filter(
+      (alarm) =>
+        alarm.name.toLowerCase().includes(name) &&
+        (status === "Paused"
+          ? alarm.paused
+          : status === "Running"
+          ? !alarm.paused
+          : alarm.paused || !alarm.paused)
+    );
+    setSearchResults(results);
+  };
 
   return (
     <div className={classes.root}>
@@ -101,7 +127,15 @@ function Main() {
         <div className={classes.appBarSpacer} />
         <Switch>
           <Route path="/dashboard" component={Dashboard} />
-          <Route path="/alarms" component={Alarms} />
+          <Route
+            path="/alarms"
+            component={() => (
+              <Alarms
+                searchAlarms={searchAlarms}
+                searchResults={searchResults}
+              />
+            )}
+          />
           <Redirect to="/dashboard" />
         </Switch>
       </main>
