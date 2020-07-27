@@ -62,17 +62,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-/* Example data */
-const alarms = [
-  {
-    name: "MyAlarm",
-    source: "Sever 1",
-    metric: "CPU Usg",
-    trigger: ">80%",
-    paused: "true",
-  },
-];
-
 function Main() {
   /* Material UI inline-styling */
   const classes = useStyles();
@@ -92,6 +81,12 @@ function Main() {
     setSearchResults(results);
   };
 
+  /* Counter of active alarms non paused */
+  const [amountActiveAlerts, setAmountActiveAlerts] = React.useState(0);
+  React.useEffect(() => {
+    setAmountActiveAlerts(alarms.filter((a) => !a.paused).length); //Lambda expression to count the amount of alarms with paused = false
+  }, [alarms]);
+
   return (
     <div className={classes.root}>
       {/* Material UI style-normalizations */}
@@ -101,7 +96,7 @@ function Main() {
       <AppBar position="absolute" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
           <IconButton color="inherit" className={classes.toolbarIcon}>
-            <Badge badgeContent={4} color="secondary">
+            <Badge badgeContent={amountActiveAlerts} color="secondary">
               <NotificationsIcon />
             </Badge>
           </IconButton>

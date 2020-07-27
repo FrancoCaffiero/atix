@@ -1,0 +1,18 @@
+{
+  "alarms": [
+    {
+      "name": "Alarm Sv1 CPU",
+      "source": "Sever 1",
+      "metric": "CPU Usg",
+      "trigger": ">80%",
+      "paused": true
+    },
+    {
+      "name": "Alert Sv4 RAM",
+      "source": "Sever 4",
+      "metric": "Memory Usg",
+      "trigger": ">80%",
+      "paused": false
+    }
+  ]
+}
