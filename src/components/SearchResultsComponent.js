@@ -122,6 +122,7 @@ function SearchResults(props) {
                                   color="primary"
                                   className={classes.actionButton}
                                   fullWidth
+                                  onClick={() => props.deleteAlarm(row.id)}
                                 >
                                   Delete
                                 </Button>
@@ -132,6 +133,9 @@ function SearchResults(props) {
                                   color="primary"
                                   className={classes.actionButton}
                                   fullWidth
+                                  onClick={() =>
+                                    props.resumeOrPauseAlarm(row.id)
+                                  }
                                 >
                                   {row.paused ? "Resume" : "Pause"}
                                 </Button>

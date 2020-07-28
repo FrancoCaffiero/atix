@@ -39,7 +39,11 @@ const Alarms = (props) => {
         <SearchFilters searchAlarms={props.searchAlarms} />
       </Container>
       <Container className={classes.container}>
-        <SearchResults searchResults={props.searchResults} />
+        <SearchResults
+          searchResults={props.searchResults}
+          deleteAlarm={props.deleteAlarm}
+          resumeOrPauseAlarm={props.resumeOrPauseAlarm}
+        />
       </Container>
     </>
   );

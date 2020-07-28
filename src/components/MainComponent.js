@@ -95,6 +95,65 @@ function Main() {
       });
   }, []);
 
+  /* Delete alarm function, fetching the REST API */
+  const deleteAlarm = (id) => {
+    fetch(baseUrl + "alarms/" + id, { method: "DELETE" })
+      .then(
+        (response) => {
+          if (response.ok) {
+            return response;
+          } else {
+            var error = new Error(
+              "Error " + response.status + ": " + response.statusText
+            );
+            error.response = response;
+            throw error;
+          }
+        },
+        (error) => {
+          var errmess = new Error(error.message);
+          throw errmess;
+        }
+      )
+      .then((response) => response.json())
+      .then(removeAlertFromList(id))
+      .catch((error) => {
+        throw error;
+      });
+  };
+
+  /* Removes the item from both the main Alarms list and the Search Results shown on screen */
+  const removeAlertFromList = (id) => {
+    setAlarms(alarms.filter((alarm) => alarm.id !== id));
+    setSearchResults(searchResults.filter((alarm) => alarm.id !== id));
+  };
+
+  /* Depending the current state of the alarm, it resumes or pauses the alarm */
+  const resumeOrPauseAlarm = (id) => {
+    /* Getting the index of the alert in the arrays  */
+    const alarmId = alarms
+      .map((alarm) => {
+        return alarm.id;
+      })
+      .indexOf(id);
+    const alarmResultId = searchResults
+      .map((alarm) => {
+        return alarm.id;
+      })
+      .indexOf(id);
+    /* New Arrays from the copy of the actual ones */
+    let newAlarms = [...alarms];
+    let newSearchResults = [...searchResults];
+    /* New value of the field */
+    const newValue = !newAlarms[alarmId].paused;
+    /* Accesing to the alert by the obtained Index in each array*/
+    newAlarms[alarmId].paused = newValue;
+    newSearchResults[alarmResultId].paused = newValue;
+    /* Updating the states with the new arrays */
+    setAlarms(newAlarms);
+    setSearchResults(newSearchResults);
+  };
+
   /* Search functionality */
   const [searchResults, setSearchResults] = React.useState([]);
   const searchAlarms = (name, status) => {
@@ -165,6 +224,8 @@ function Main() {
               <Alarms
                 searchAlarms={searchAlarms}
                 searchResults={searchResults}
+                deleteAlarm={deleteAlarm}
+                resumeOrPauseAlarm={resumeOrPauseAlarm}
               />
             )}
           />
