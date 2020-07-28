@@ -128,8 +128,41 @@ function Main() {
     setSearchResults(searchResults.filter((alarm) => alarm.id !== id));
   };
 
-  /* Depending the current state of the alarm, it resumes or pauses the alarm */
+  /* Resume or pause alarm function, fetching the REST API */
   const resumeOrPauseAlarm = (id) => {
+    fetch(baseUrl + "alarms/" + id, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(alarms.filter((a) => a.id === id)),
+    })
+      .then(
+        (response) => {
+          if (response.ok) {
+            return response;
+          } else {
+            var error = new Error(
+              "Error " + response.status + ": " + response.statusText
+            );
+            error.response = response;
+            throw error;
+          }
+        },
+        (error) => {
+          var errmess = new Error(error.message);
+          throw errmess;
+        }
+      )
+      .then((response) => response.json())
+      .then(resumeOrPauseAlarmInArrays(id))
+      .catch((error) => {
+        throw error;
+      });
+  };
+
+  /* Depending the current state of the alarm, it resumes or pauses the alarm */
+  const resumeOrPauseAlarmInArrays = (id) => {
     /* Getting the index of the alert in the arrays  */
     const alarmId = alarms
       .map((alarm) => {
