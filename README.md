@@ -1,68 +1,38 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project
 
-## Available Scripts
+    - Was created with [Create React App](https://github.com/facebook/create-react-app).
 
-In the project directory, you can run:
+    - Uses JSONPlacerHolder as Fake Online REST API (https://jsonplaceholder.typicode.com/)
 
-### `yarn start`
+    - 's database is loacated in the root directory (db.json), pushed to GitHub in order to be able to use it through JSONPlacerHolder (http://my-json-server.typicode.com/francocaffiero/atix/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    Notice that the online database is not persistent
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+    - Uses Material UI as a React component library for the UI (https://material-ui.com/)
 
-### `yarn test`
+    - Uses Material UI inline-styling (https://material-ui.com/styles/)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    - Uses Yarn as package manager (https://classic.yarnpkg.com/en/)
 
-### `yarn build`
+    - Uses react-router-dom for routing (https://www.npmjs.com/package/react-router-dom/)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    - Uses gitHub as version control (https://github.com/), project (https://github.com/FrancoCaffiero/atix)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+How to download and start the project:
+-Open Terminal.
+-Change the current working directory to the location where you want the cloned directory.
+-Type 'git clone', and then paste the URL of the repository (https://github.com/FrancoCaffiero/atix).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    $ git clone https://github.com/FrancoCaffiero/atix
 
-### `yarn eject`
+    Press Enter to create your local clone.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    If using yarn, type 'yarn install' on the Terminal, if using npm then 'npm install'. This will install all the project's dependencies.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    Running 'yarn start' or 'npm start', should be enough to start the application.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    In order to use the REST API required for this project, an internet connection is necessary.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Personal thoughts:
+I decided to use Material UI since I am very familiar with and I believe is a library with simples React components but very useful.
+About JSONPlacerHolder, I find it very easy to use altough the database is not persistent.
