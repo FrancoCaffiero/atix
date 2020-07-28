@@ -1,6 +1,7 @@
 {
   "alarms": [
     {
+      "id": 1,
       "name": "Alarm Sv1 CPU",
       "source": "Sever 1",
       "metric": "CPU Usg",
@@ -8,6 +9,7 @@
       "paused": true
     },
     {
+      "id": 2,
       "name": "Alert Sv4 RAM",
       "source": "Sever 4",
       "metric": "Memory Usg",

@@ -9,6 +9,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
 
 /* Search results table columns setting */
 const columns = [
@@ -36,6 +37,7 @@ const columns = [
     id: "paused",
     label: "Paused",
     minWidth: 20,
+    format: (value) => value.toString(),
   },
   {
     id: "actions",
@@ -103,36 +105,45 @@ function SearchResults(props) {
                       if (column.id === "actions") {
                         return (
                           <TableCell align="center" justify="center">
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              className={classes.actionButton}
-                            >
-                              Edit
-                            </Button>
-
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              className={classes.actionButton}
-                            >
-                              Delete
-                            </Button>
-
-                            <Button
-                              variant="contained"
-                              color="primary"
-                              className={classes.actionButton}
-                            >
-                              Resume
-                            </Button>
+                            <Grid container spacing={1}>
+                              <Grid item xs={12} md={4}>
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                  className={classes.actionButton}
+                                  fullWidth
+                                >
+                                  Edit
+                                </Button>
+                              </Grid>
+                              <Grid item xs={12} md={4}>
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                  className={classes.actionButton}
+                                  fullWidth
+                                >
+                                  Delete
+                                </Button>
+                              </Grid>
+                              <Grid item xs={12} md={4}>
+                                <Button
+                                  variant="contained"
+                                  color="primary"
+                                  className={classes.actionButton}
+                                  fullWidth
+                                >
+                                  {row.paused ? "Resume" : "Pause"}
+                                </Button>
+                              </Grid>
+                            </Grid>
                           </TableCell>
                         );
                       } else {
                         const value = row[column.id];
                         return (
                           <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === "number"
+                            {column.format && typeof value === "boolean"
                               ? column.format(value)
                               : value}
                           </TableCell>
